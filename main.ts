@@ -5,10 +5,15 @@ namespace SpriteKind {
 }
 sprites.onOverlap(SpriteKind.Ball, SpriteKind.Player, function (sprite, otherSprite) {
     sprite.setVelocity((sprite.x - otherSprite.x) * 3, -1 * sprite.vy)
-    if (sprite.x > -150) {
-        sprite.vx += -5
+    if (sprite.vy > -150) {
+        sprite.vy += -5
     }
 })
+function buildSetBricks () {
+    for (let index = 0; index <= 4; index++) {
+    	
+    }
+}
 sprites.onOverlap(SpriteKind.Ball, SpriteKind.Edge, function (sprite, otherSprite) {
     sprite.setVelocity(-1 * sprite.vx, sprite.vy)
 })
