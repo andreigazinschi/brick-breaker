@@ -3,6 +3,7 @@ namespace SpriteKind {
     export const Ball = SpriteKind.create()
     export const top = SpriteKind.create()
     export const brick = SpriteKind.create()
+    export const powerup = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Ball, SpriteKind.Player, function (sprite, otherSprite) {
     sprite.setVelocity((sprite.x - otherSprite.x) * 4, -1 * sprite.vy)
@@ -25,6 +26,10 @@ sprites.onOverlap(SpriteKind.Ball, SpriteKind.brick, function (sprite, otherSpri
     sprite.setVelocity(sprite.vx, -1 * sprite.vy)
     numBricks += -1
 })
+sprites.onOverlap(SpriteKind.Ball, SpriteKind.powerup, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.warmRadial, 200)
+    info.changeLifeBy(1)
+})
 function buildSetBricks () {
     for (let index = 0; index <= 6; index++) {
         for (let index2 = 0; index2 < 4; index2++) {
@@ -35,7 +40,7 @@ function buildSetBricks () {
     }
 }
 function createBrick (x: number, y: number) {
-    randNum = Math.randomRange(0, 2)
+    randNum = Math.randomRange(0, 9)
     if (randNum == 0) {
         brick = sprites.create(img`
 f f f f f f f f f f f f f f f f 
@@ -58,7 +63,7 @@ f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f
 f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
 f f f f f f f f f f f f f f f f 
 `, SpriteKind.brick)
-    } else {
+    } else if (randNum == 2) {
         brick = sprites.create(img`
 f f f f f f f f f f f f f f f f 
 f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
@@ -69,6 +74,83 @@ f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f
 f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
 f f f f f f f f f f f f f f f f 
 `, SpriteKind.brick)
+    } else if (randNum == 3) {
+        brick = sprites.create(img`
+f f f f f f f f f f f f f f f f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f f f f f f f f f f f f f f f f 
+`, SpriteKind.brick)
+    } else if (randNum == 4) {
+        brick = sprites.create(img`
+f f f f f f f f f f f f f f f f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f f f f f f f f f f f f f f f f 
+`, SpriteKind.brick)
+    } else if (randNum == 5) {
+        brick = sprites.create(img`
+f f f f f f f f f f f f f f f f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f f f f f f f f f f f f f f f f 
+`, SpriteKind.brick)
+    } else if (randNum == 6) {
+        brick = sprites.create(img`
+f f f f f f f f f f f f f f f f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f f f f f f f f f f f f f f f f 
+`, SpriteKind.brick)
+    } else if (randNum == 7) {
+        brick = sprites.create(img`
+f f f f f f f f f f f f f f f f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+f f f f f f f f f f f f f f f f 
+`, SpriteKind.brick)
+    } else if (randNum == 8) {
+        brick = sprites.create(img`
+f f f f f f f f f f f f f f f f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+f f f f f f f f f f f f f f f f 
+`, SpriteKind.brick)
+    } else {
+        brick = sprites.create(img`
+f f f f f f f f f f f f f f f f 
+f 4 4 4 4 4 2 4 4 2 4 4 4 4 4 f 
+f 4 4 4 4 2 2 2 2 2 2 4 4 4 4 f 
+f 4 4 4 4 2 2 2 2 2 2 4 4 4 4 f 
+f 4 4 4 4 2 2 2 2 2 2 4 4 4 4 f 
+f 4 4 4 4 4 2 2 2 2 4 4 4 4 4 f 
+f 4 4 4 4 4 4 2 2 4 4 4 4 4 4 f 
+f f f f f f f f f f f f f f f f 
+`, SpriteKind.powerup)
     }
     brick.setPosition(x, y)
     numBricks += 1
